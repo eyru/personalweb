@@ -3,217 +3,503 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>个人简历 | Personal Profile</title>
+<title>何瑞程 · 听力与言语康复学 | He Ruicheng</title>
+<meta name="description" content="何瑞程 — 北京语言大学海南国际学院，听力与言语康复学。研究方向：助听器与耳机的 AI 辅助降噪。">
+<script>document.documentElement.className += ' js';</script>
 <style>
+/* ============================================================
+   设计令牌
+   ============================================================ */
+:root{
+  --bg:#ffffff;
+  --bg-soft:#f7f9fc;
+  --ink:#0e141b;
+  --ink-soft:#33404f;
+  --muted:#6b7684;
+  --line:#e6eaf0;
+  --line-soft:#eff2f7;
+  --accent:#1d5b96;
+  --accent-bright:#2b8cf0;
+  --accent-wash:#eef5fd;
+  --card:#ffffff;
+  --shadow-sm:0 1px 2px rgba(16,24,40,.04);
+  --shadow-md:0 2px 6px rgba(16,24,40,.05), 0 8px 24px rgba(16,24,40,.05);
+  --shadow-lg:0 4px 10px rgba(16,24,40,.06), 0 18px 40px rgba(16,24,40,.09);
+  --r-sm:8px; --r-md:12px; --r-lg:18px;
+  --wrap:900px;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+@media (prefers-color-scheme: dark){
   :root{
-    --bg:#ffffff;
-    --fg:#1a1a1a;
-    --muted:#5c6470;
-    --line:#e5e7eb;
-    --accent:#1f4e79;
-    --accent-soft:#f0f5fa;
-    --tag:#eef2f6;
+    --bg:#0b0f14;
+    --bg-soft:#0f151c;
+    --ink:#e9edf2;
+    --ink-soft:#b9c3cf;
+    --muted:#7f8b99;
+    --line:#1e2732;
+    --line-soft:#18202a;
+    --accent:#78b4f5;
+    --accent-bright:#9ccbff;
+    --accent-wash:#111d2b;
+    --card:#0f151c;
+    --shadow-sm:0 1px 2px rgba(0,0,0,.4);
+    --shadow-md:0 2px 6px rgba(0,0,0,.35), 0 8px 24px rgba(0,0,0,.3);
+    --shadow-lg:0 4px 10px rgba(0,0,0,.4), 0 18px 40px rgba(0,0,0,.45);
   }
-  @media (prefers-color-scheme: dark){
-    :root{
-      --bg:#14171a; --fg:#e8eaed; --muted:#9aa4b2; --line:#2c3138;
-      --accent:#8ab4f8; --accent-soft:#1b2229; --tag:#22282f;
-    }
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{
-    background:var(--bg); color:var(--fg);
-    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","Hiragino Sans GB",sans-serif;
-    line-height:1.7; font-size:15px;
-    -webkit-font-smoothing:antialiased;
-  }
-  .wrap{max-width:860px;margin:0 auto;padding:0 24px 80px}
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+@media (prefers-reduced-motion: reduce){ html{scroll-behavior:auto} }
 
-  /* ---------- 语言切换 ---------- */
-  .langbar{
-    position:sticky; top:0; z-index:50;
-    background:var(--bg); border-bottom:1px solid var(--line);
-    display:flex; justify-content:flex-end; align-items:center; gap:10px;
-    padding:10px 24px; margin:0 -24px 0;
-    backdrop-filter:blur(8px);
-  }
-  .langbar button{
-    font:inherit; font-size:13px; cursor:pointer;
-    background:transparent; color:var(--muted);
-    border:1px solid var(--line); border-radius:6px;
-    padding:3px 12px; transition:.15s;
-  }
-  .langbar button:hover{color:var(--fg);border-color:var(--muted)}
-  .langbar button.on{background:var(--accent);color:#fff;border-color:var(--accent)}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Microsoft YaHei","Hiragino Sans GB","PingFang SC",sans-serif;
+  font-size:15.5px; line-height:1.75;
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+::selection{background:var(--accent-wash);color:var(--ink)}
+a{color:inherit}
 
-  /* ---------- 页头 ---------- */
-  header{padding:56px 0 32px;border-bottom:1px solid var(--line)}
-  h1{font-size:32px;font-weight:700;letter-spacing:-.5px;line-height:1.3}
-  .subtitle{font-size:17px;color:var(--accent);font-weight:600;margin-top:8px}
-  .metaline{color:var(--muted);font-size:14px;margin-top:12px}
-  .metaline span{margin-right:16px;white-space:nowrap}
-  .summary{margin-top:20px;max-width:680px;color:var(--fg)}
-  .contact{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px}
-  .contact a,.contact span{
-    display:inline-flex;align-items:center;gap:6px;
-    font-size:13.5px;text-decoration:none;
-    background:var(--tag);color:var(--fg);
-    border-radius:6px;padding:5px 12px;
-  }
-  .contact a:hover{background:var(--accent);color:#fff}
+/* ============================================================
+   滚动进度条
+   ============================================================ */
+#progress{
+  position:fixed; top:0; left:0; height:2px; width:0;
+  background:linear-gradient(90deg,var(--accent),var(--accent-bright));
+  z-index:100; transition:width .1s linear;
+}
 
-  /* ---------- 章节 ---------- */
-  section{margin-top:44px}
-  h2{
-    font-size:13px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;
-    color:var(--accent);padding-bottom:8px;border-bottom:2px solid var(--accent-soft);
-    margin-bottom:20px;
-  }
-  h3{font-size:16px;font-weight:650;margin-bottom:2px}
-  .item{margin-bottom:26px}
-  .item:last-child{margin-bottom:0}
-  .item-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;flex-wrap:wrap}
-  .when{color:var(--muted);font-size:13.5px;white-space:nowrap;font-variant-numeric:tabular-nums}
-  .where{color:var(--muted);font-size:14px;margin-top:1px}
-  .desc{margin-top:8px}
-  .desc ul{list-style:none;margin-top:6px}
-  .desc li{position:relative;padding-left:16px;margin-bottom:5px}
-  .desc li::before{
-    content:"";position:absolute;left:2px;top:.72em;
-    width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.6;
-  }
-  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-  .tags span{
-    font-size:12.5px;background:var(--tag);color:var(--muted);
-    border-radius:4px;padding:2px 9px;
-  }
+/* ============================================================
+   顶栏
+   ============================================================ */
+.nav{
+  position:sticky; top:0; z-index:60;
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:saturate(180%) blur(14px);
+  -webkit-backdrop-filter:saturate(180%) blur(14px);
+  border-bottom:1px solid var(--line-soft);
+}
+.nav-in{
+  max-width:var(--wrap); margin:0 auto; padding:11px 26px;
+  display:flex; align-items:center; justify-content:space-between; gap:18px;
+}
+.nav-brand{
+  font-size:13.5px; font-weight:700; letter-spacing:.02em;
+  white-space:nowrap; text-decoration:none; color:var(--ink);
+}
+.nav-brand .dot{color:var(--accent-bright)}
+.nav-links{display:flex; gap:2px; margin-left:auto}
+.nav-links a{
+  font-size:13px; color:var(--muted); text-decoration:none;
+  padding:5px 10px; border-radius:6px; white-space:nowrap;
+  transition:color .18s, background .18s;
+}
+.nav-links a:hover{color:var(--accent); background:var(--accent-wash)}
+.lang{display:flex; gap:4px; background:var(--bg-soft); padding:3px; border-radius:8px; border:1px solid var(--line-soft)}
+.lang button{
+  font:inherit; font-size:12.5px; font-weight:600; cursor:pointer;
+  background:transparent; color:var(--muted); border:0; border-radius:6px;
+  padding:4px 11px; transition:.18s var(--ease);
+}
+.lang button:hover{color:var(--ink)}
+.lang button.on{background:var(--bg); color:var(--accent); box-shadow:var(--shadow-sm)}
+@media (max-width:760px){ .nav-links{display:none} }
 
-  /* ---------- 技能表 ---------- */
-  .skillgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
-  .skill h4{font-size:14px;font-weight:650;margin-bottom:8px;color:var(--accent)}
-  .skill ul{list-style:none}
-  .skill li{position:relative;padding-left:15px;margin-bottom:4px;font-size:14px}
-  .skill li::before{
-    content:"";position:absolute;left:2px;top:.72em;
-    width:5px;height:5px;border-radius:50%;background:var(--accent);opacity:.6;
-  }
+/* ============================================================
+   首屏
+   ============================================================ */
+.hero{position:relative; overflow:hidden; border-bottom:1px solid var(--line-soft)}
+.hero-glow{
+  position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(760px 340px at 12% -12%, var(--accent-wash), transparent 62%),
+    radial-gradient(520px 300px at 92% 8%, color-mix(in srgb,var(--accent-wash) 60%, transparent), transparent 60%);
+}
+.hero-grid{
+  position:absolute; inset:0; pointer-events:none; opacity:.5;
+  background-image:linear-gradient(var(--line-soft) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--line-soft) 1px,transparent 1px);
+  background-size:46px 46px;
+  mask-image:radial-gradient(circle at 30% 0%, #000 0%, transparent 68%);
+  -webkit-mask-image:radial-gradient(circle at 30% 0%, #000 0%, transparent 68%);
+}
+.hero-in{
+  position:relative; max-width:var(--wrap); margin:0 auto;
+  padding:76px 26px 60px;
+}
+.eyebrow{
+  display:inline-flex; align-items:center; gap:8px;
+  font-size:12.5px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--accent); background:var(--accent-wash);
+  border:1px solid color-mix(in srgb,var(--accent) 16%, transparent);
+  padding:5px 13px; border-radius:999px; margin-bottom:22px;
+}
+.eyebrow::before{
+  content:""; width:6px; height:6px; border-radius:50%;
+  background:var(--accent-bright); box-shadow:0 0 0 3px color-mix(in srgb,var(--accent-bright) 22%, transparent);
+}
+h1{
+  font-size:clamp(38px,7vw,62px); line-height:1.06; font-weight:800;
+  letter-spacing:-.028em; margin-bottom:14px;
+}
+h1 .accent{
+  background:linear-gradient(100deg,var(--accent) 10%,var(--accent-bright) 90%);
+  -webkit-background-clip:text; background-clip:text;
+  -webkit-text-fill-color:transparent; color:transparent;
+}
+.hero-role{
+  font-size:clamp(15px,2.1vw,17.5px); color:var(--ink-soft);
+  font-weight:600; letter-spacing:-.005em; margin-bottom:8px;
+}
+.hero-org{font-size:14.5px; color:var(--muted); margin-bottom:26px}
+.hero-bio{max-width:640px; color:var(--ink-soft); font-size:15.5px; margin-bottom:28px}
+.hero-bio strong{color:var(--ink); font-weight:650}
 
-  /* ---------- 高亮卡片 ---------- */
-  .highlight{
-    border-left:3px solid var(--accent);background:var(--accent-soft);
-    border-radius:0 6px 6px 0;padding:14px 18px;margin-top:10px;
-  }
-  .highlight b{color:var(--accent)}
+.cta{display:flex; flex-wrap:wrap; gap:10px}
+.chip{
+  display:inline-flex; align-items:center; gap:7px;
+  font-size:13.5px; font-weight:550; text-decoration:none;
+  color:var(--ink-soft); background:var(--card);
+  border:1px solid var(--line); border-radius:999px;
+  padding:8px 16px; box-shadow:var(--shadow-sm);
+  transition:.2s var(--ease);
+}
+.chip:hover{
+  color:var(--accent); border-color:color-mix(in srgb,var(--accent) 40%, transparent);
+  transform:translateY(-1px); box-shadow:var(--shadow-md);
+}
+.chip svg{width:14px;height:14px;flex:none;opacity:.72}
+.chip:hover svg{opacity:1}
 
-  /* ---------- 占位符 ---------- */
-  .todo{
-    background:#fff3cd;color:#7a5b00;border-radius:4px;
-    padding:1px 6px;font-weight:600;font-size:.92em;
-    border:1px dashed #d9a800;
-  }
-  @media (prefers-color-scheme: dark){
-    .todo{background:#3a2f10;color:#ffd970;border-color:#8a6d15}
-  }
+/* 波形装饰 —— 呼应音频/信号处理方向 */
+.wave{
+  position:relative; max-width:var(--wrap); margin:0 auto;
+  padding:0 26px 0; height:52px; display:flex; align-items:flex-end; gap:3px;
+  mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+  -webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);
+}
+.wave i{
+  flex:1; min-width:2px; border-radius:2px;
+  background:linear-gradient(180deg,var(--accent-bright),color-mix(in srgb,var(--accent) 45%, transparent));
+  opacity:.28;
+  transform-origin:bottom;
+  animation:eq 3.2s var(--ease) infinite alternate;
+}
+@keyframes eq{
+  from{transform:scaleY(.18)}
+  to{transform:scaleY(1)}
+}
+@media (prefers-reduced-motion: reduce){
+  .wave i{animation:none; transform:scaleY(.42)}
+}
 
-  footer{
-    margin-top:56px;padding-top:22px;border-top:1px solid var(--line);
-    color:var(--muted);font-size:13px;
-    display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;
-  }
+/* ============================================================
+   主体
+   ============================================================ */
+main{max-width:var(--wrap); margin:0 auto; padding:0 26px 90px}
+section{padding-top:70px; scroll-margin-top:70px}
+.sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:30px}
+.sec-num{
+  font-size:12.5px; font-weight:700; letter-spacing:.08em;
+  color:var(--accent); font-variant-numeric:tabular-nums;
+  padding-top:3px;
+}
+.sec-title{
+  font-size:21px; font-weight:750; letter-spacing:-.015em;
+  padding-bottom:9px; border-bottom:2px solid var(--line);
+  flex:1;
+}
+.sec-title .en{font-size:13px; font-weight:600; color:var(--muted); letter-spacing:.02em}
 
-  /* ---------- 语言显隐 ---------- */
-  /* 默认全部隐藏；由 JS 给当前语言的元素加 .on 类来显示。
-     不用 [data-lang] 属性选择器，避免同一元素只带一个值导致双语并存。 */
-  [data-lang]{display:none !important}
-  [data-lang].on{display:revert !important}
-  li[data-lang].on{display:list-item !important}
-  span[data-lang].on{display:inline !important}
-  p[data-lang].on{display:block !important}
+/* 卡片 */
+.card{
+  background:var(--card); border:1px solid var(--line);
+  border-radius:var(--r-md); padding:24px 26px;
+  box-shadow:var(--shadow-sm); transition:.24s var(--ease);
+}
+.card:hover{box-shadow:var(--shadow-md); border-color:color-mix(in srgb,var(--accent) 22%, var(--line))}
+.card + .card{margin-top:16px}
 
-  @media print{
-    .langbar{display:none}
-    body{font-size:11.5pt}
-    section{break-inside:avoid}
-    a{color:inherit;text-decoration:none}
-  }
-  @media (max-width:600px){
-    h1{font-size:26px}
-    header{padding:32px 0 24px}
-    .item-head{flex-direction:column;gap:2px}
-  }
+.row{display:flex; justify-content:space-between; align-items:baseline; gap:18px; flex-wrap:wrap}
+.row h3{font-size:17px; font-weight:700; letter-spacing:-.012em; line-height:1.4}
+.when{
+  font-size:12.5px; font-weight:600; color:var(--muted);
+  font-variant-numeric:tabular-nums; white-space:nowrap;
+  background:var(--bg-soft); border:1px solid var(--line-soft);
+  padding:3px 11px; border-radius:999px;
+}
+.where{font-size:14px; color:var(--muted); margin-top:4px}
+.body{margin-top:14px}
+.body p + p{margin-top:9px}
+ul.bul{list-style:none; margin-top:10px}
+ul.bul li{position:relative; padding-left:19px; margin-bottom:7px; color:var(--ink-soft)}
+ul.bul li:last-child{margin-bottom:0}
+ul.bul li::before{
+  content:""; position:absolute; left:4px; top:.68em;
+  width:6px; height:6px; border-radius:50%;
+  background:var(--accent); opacity:.55;
+}
+ul.bul li strong{color:var(--ink); font-weight:650}
+
+/* 标签 */
+.tags{display:flex; flex-wrap:wrap; gap:7px; margin-top:15px}
+.tags span{
+  font-size:12px; font-weight:550; letter-spacing:.01em;
+  color:var(--muted); background:var(--bg-soft);
+  border:1px solid var(--line-soft); border-radius:6px; padding:3px 10px;
+  transition:.18s;
+}
+.card:hover .tags span{border-color:var(--line)}
+
+/* 高亮块 */
+.note{
+  margin-top:16px; padding:14px 18px; border-radius:var(--r-sm);
+  background:var(--accent-wash);
+  border-left:3px solid var(--accent-bright);
+  font-size:14.5px; color:var(--ink-soft);
+}
+.note b{color:var(--accent); font-weight:700}
+
+/* ============================================================
+   技能
+   ============================================================ */
+.skills{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+@media (max-width:820px){ .skills{grid-template-columns:repeat(auto-fit,minmax(215px,1fr))} }
+.skill{
+  background:var(--card); border:1px solid var(--line); border-radius:var(--r-md);
+  padding:20px 22px; box-shadow:var(--shadow-sm); transition:.24s var(--ease);
+}
+.skill:hover{
+  transform:translateY(-2px); box-shadow:var(--shadow-md);
+  border-color:color-mix(in srgb,var(--accent) 24%, var(--line));
+}
+.skill h4{
+  font-size:12.5px; font-weight:700; letter-spacing:.05em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:12px;
+}
+.skill ul{list-style:none}
+.skill li{
+  position:relative; padding-left:16px; margin-bottom:6px;
+  font-size:14.5px; color:var(--ink-soft);
+}
+.skill li:last-child{margin-bottom:0}
+.skill li::before{
+  content:""; position:absolute; left:2px; top:.7em;
+  width:5px; height:5px; border-radius:50%; background:var(--accent); opacity:.5;
+}
+
+/* ============================================================
+   时间轴（获奖）
+   ============================================================ */
+.tl{position:relative; padding-left:30px}
+.tl::before{
+  content:""; position:absolute; left:7px; top:8px; bottom:8px; width:2px;
+  background:linear-gradient(180deg,var(--accent-bright),var(--line));
+  opacity:.4; border-radius:2px;
+}
+.tl-item{position:relative; padding-bottom:28px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item::before{
+  content:""; position:absolute; left:-30px; top:7px;
+  width:16px; height:16px; border-radius:50%;
+  background:var(--bg); border:2.5px solid var(--accent-bright);
+  box-shadow:0 0 0 4px var(--bg);
+}
+.tl-head{display:flex; justify-content:space-between; align-items:baseline; gap:16px; flex-wrap:wrap}
+.tl-head h3{font-size:16px; font-weight:700; letter-spacing:-.01em; line-height:1.45}
+.tl-badge{
+  font-size:12px; font-weight:650; color:var(--accent);
+  background:var(--accent-wash); border-radius:999px; padding:3px 11px;
+  white-space:nowrap;
+}
+
+/* ============================================================
+   滚动入场
+   ============================================================ */
+.reveal{opacity:0; transform:translateY(14px)}
+.reveal.in{opacity:1; transform:none; transition:opacity .6s var(--ease), transform .6s var(--ease)}
+@media (prefers-reduced-motion: reduce){
+  .reveal,.reveal.in{opacity:1 !important; transform:none !important; transition:none !important}
+}
+
+/* ============================================================
+   页脚
+   ============================================================ */
+footer{border-top:1px solid var(--line-soft); background:var(--bg-soft)}
+.foot-in{
+  max-width:var(--wrap); margin:0 auto; padding:26px;
+  display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+  font-size:13px; color:var(--muted);
+}
+.foot-in a{color:var(--muted); text-decoration:none; border-bottom:1px solid transparent; transition:.18s}
+.foot-in a:hover{color:var(--accent); border-bottom-color:var(--accent)}
+
+/* ============================================================
+   语言显隐（渐进增强）
+   无 JS 时：只显示中文（默认语言），不会中英混杂
+   有 JS 时：由 .on 类精确控制
+   ============================================================ */
+html:not(.js) [data-lang="en"]{display:none !important}
+.js [data-lang]{display:none !important}
+.js [data-lang].on{display:revert !important}
+.js li[data-lang].on{display:list-item !important}
+.js span[data-lang].on{display:inline !important}
+.js p[data-lang].on{display:block !important}
+.js div[data-lang].on{display:block !important}
+
+/* ============================================================
+   响应式
+   ============================================================ */
+@media (max-width:600px){
+  .hero-in{padding:52px 22px 44px}
+  main{padding:0 22px 70px}
+  section{padding-top:56px}
+  .card{padding:20px 20px}
+  .row{flex-direction:column; gap:6px}
+  .tl{padding-left:26px}
+  .wave{height:40px; padding:0 22px}
+  .sec-title{font-size:19px}
+}
+
+/* ============================================================
+   打印
+   ============================================================ */
+@media print{
+  :root{--bg:#fff;--card:#fff;--bg-soft:#fff;--shadow-sm:none;--shadow-md:none;--shadow-lg:none}
+  .nav,#progress,.wave,.hero-glow,.hero-grid{display:none !important}
+  body{font-size:10.5pt; line-height:1.5}
+  .hero-in{padding:0 0 14pt}
+  main{padding:0}
+  section{padding-top:16pt; break-inside:avoid}
+  .card,.skill{border:1px solid #ddd; padding:10pt; break-inside:avoid}
+  .reveal{opacity:1 !important; transform:none !important}
+  a{text-decoration:none; color:inherit}
+  h1{font-size:26pt}
+}
 </style>
 </head>
-<body data-active="zh">
-<div class="wrap">
+<body>
 
-  <div class="langbar">
-    <button id="btn-zh" class="on" onclick="setLang('zh')">中文</button>
-    <button id="btn-en" onclick="setLang('en')">English</button>
+<div id="progress"></div>
+
+<!-- ==================== 顶栏 ==================== -->
+<nav class="nav">
+  <div class="nav-in">
+    <a class="nav-brand" href="#top">
+      <span data-lang="zh">何瑞程</span><span data-lang="en">He Ruicheng</span><span class="dot">.</span>
+    </a>
+    <div class="nav-links">
+      <a href="#education"><span data-lang="zh">教育</span><span data-lang="en">Education</span></a>
+      <a href="#projects"><span data-lang="zh">项目</span><span data-lang="en">Projects</span></a>
+      <a href="#skills"><span data-lang="zh">技能</span><span data-lang="en">Skills</span></a>
+      <a href="#awards"><span data-lang="zh">获奖</span><span data-lang="en">Awards</span></a>
+      <a href="#research"><span data-lang="zh">研究兴趣</span><span data-lang="en">Research</span></a>
+    </div>
+    <div class="lang">
+      <button id="btn-zh" class="on" onclick="setLang('zh')">中文</button>
+      <button id="btn-en" onclick="setLang('en')">EN</button>
+    </div>
   </div>
+</nav>
 
-  <header>
-    <h1><span data-lang="zh">何瑞程</span><span data-lang="en">He Ruicheng</span></h1>
-    <div class="subtitle">
+<!-- ==================== 首屏 ==================== -->
+<header class="hero" id="top">
+  <div class="hero-glow"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-in">
+    <div class="eyebrow">
       <span data-lang="zh">听力与言语康复学 · 大一在读</span>
-      <span data-lang="en">B.Sc. in Hearing and Speech Rehabilitation · First-year Undergraduate</span>
+      <span data-lang="en">Hearing &amp; Speech Rehabilitation · Year 1</span>
     </div>
-    <div class="metaline">
-      <span data-lang="zh">北京语言大学 海南国际学院</span>
-      <span data-lang="en">Beijing Language and Culture University, Hainan International College</span>
+    <h1>
+      <span data-lang="zh">何瑞程</span><span data-lang="en">He Ruicheng</span><span class="accent">.</span>
+    </h1>
+    <div class="hero-role">
+      <span data-lang="zh">助听器与耳机的 AI 辅助降噪</span>
+      <span data-lang="en">AI-Assisted Noise Reduction for Hearing Aids &amp; Earphones</span>
     </div>
-    <p class="summary" data-lang="zh">
+    <div class="hero-org">
+      <span data-lang="zh">北京语言大学 · 海南国际学院</span>
+      <span data-lang="en">Beijing Language and Culture University · Hainan International College</span>
+    </div>
+    <p class="hero-bio" data-lang="zh">
       听力与言语康复学专业本科生，研究兴趣在<strong>助听器与耳机的 AI 辅助降噪</strong>。
       具备信息学竞赛（OI）背景，熟悉 C++ 与算法设计；正在系统自学线性代数、信号与系统，
       并推进一个从算法到可穿戴原型的实时语音增强项目。
     </p>
-    <p class="summary" data-lang="en">
+    <p class="hero-bio" data-lang="en">
       Undergraduate in Hearing and Speech Rehabilitation, with research interests in
       <strong>AI-assisted noise reduction for hearing aids and earphones</strong>.
       Background in competitive programming (C++ and algorithm design); currently
       self-studying linear algebra and signals &amp; systems, while building a real-time
       speech enhancement project from algorithm to wearable prototype.
     </p>
-    <div class="contact">
-      <a href="mailto:1585253788@qq.com">1585253788@qq.com</a>
-      <a href="https://github.com/eyru" target="_blank" rel="noopener">github.com/eyru</a>
+    <div class="cta">
+      <a class="chip" href="mailto:1585253788@qq.com">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+        1585253788@qq.com
+      </a>
+      <a class="chip" href="https://github.com/eyru" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
+        github.com/eyru
+      </a>
     </div>
-  </header>
+  </div>
+  <div class="wave" aria-hidden="true"></div>
+</header>
 
-  <!-- ============ 教育 ============ -->
-  <section>
-    <h2><span data-lang="zh">教育背景</span><span data-lang="en">Education</span></h2>
-    <div class="item">
-      <div class="item-head">
-        <h3><span data-lang="zh">北京语言大学 · 海南国际学院</span><span data-lang="en">Beijing Language and Culture University · Hainan International College</span></h3>
+<main>
+
+  <!-- ==================== 01 教育 ==================== -->
+  <section id="education">
+    <div class="sec-head">
+      <span class="sec-num">01</span>
+      <h2 class="sec-title">
+        <span data-lang="zh">教育背景</span><span data-lang="en">Education</span>
+      </h2>
+    </div>
+    <div class="card reveal">
+      <div class="row">
+        <h3>
+          <span data-lang="zh">北京语言大学 · 海南国际学院</span>
+          <span data-lang="en">Beijing Language and Culture University · Hainan International College</span>
+        </h3>
         <span class="when"><span data-lang="zh">2026 – 2030（预计）</span><span data-lang="en">2026 – 2030 (expected)</span></span>
       </div>
       <div class="where">
         <span data-lang="zh">听力与言语康复学 · 本科 · 海南陵水</span>
         <span data-lang="en">B.Sc. in Hearing and Speech Rehabilitation · Lingshui, Hainan</span>
       </div>
-      <div class="desc">
-        <ul>
-          <li data-lang="zh">专业方向：听觉科学、言语康复、助听器验配与听觉工程。</li>
-          <li data-lang="en">Core areas: auditory science, speech rehabilitation, hearing-aid fitting and auditory engineering.</li>
-          <li data-lang="zh">自学补充：线性代数、微积分、概率统计、信号与系统（本校培养方案未开设高等数学）。</li>
-          <li data-lang="en">Self-study supplement: linear algebra, calculus, probability &amp; statistics, signals and systems.</li>
+      <div class="body">
+        <ul class="bul">
+          <li data-lang="zh"><strong>专业方向</strong>：听觉科学、言语康复、助听器验配与听觉工程。</li>
+          <li data-lang="en"><strong>Core areas</strong>: auditory science, speech rehabilitation, hearing-aid fitting and auditory engineering.</li>
+          <li data-lang="zh"><strong>自学补充</strong>：线性代数、微积分、概率统计、信号与系统（本校培养方案未开设高等数学）。</li>
+          <li data-lang="en"><strong>Self-study supplement</strong>: linear algebra, calculus, probability &amp; statistics, signals and systems.</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ============ 项目 ============ -->
-  <section>
-    <h2><span data-lang="zh">项目经历</span><span data-lang="en">Projects</span></h2>
-
-    <div class="item">
-      <div class="item-head">
-        <h3><span data-lang="zh">实时降噪系统（从算法到可穿戴原型）</span><span data-lang="en">Real-time Noise Reduction System (algorithm to wearable prototype)</span></h3>
+  <!-- ==================== 02 项目 ==================== -->
+  <section id="projects">
+    <div class="sec-head">
+      <span class="sec-num">02</span>
+      <h2 class="sec-title">
+        <span data-lang="zh">项目经历</span><span data-lang="en">Projects</span>
+      </h2>
+    </div>
+    <div class="card reveal">
+      <div class="row">
+        <h3>
+          <span data-lang="zh">实时降噪系统 —— 从算法到可穿戴原型</span>
+          <span data-lang="en">Real-time Noise Reduction System — Algorithm to Wearable Prototype</span>
+        </h3>
         <span class="when"><span data-lang="zh">进行中</span><span data-lang="en">Ongoing</span></span>
       </div>
-      <div class="desc">
-        <ul>
+      <div class="body">
+        <ul class="bul">
           <li data-lang="zh">面向轻中度感音神经性听损人群，研究 <strong>10 ms 以内端到端延迟</strong>约束下的轻量化深度学习降噪模型。</li>
           <li data-lang="en">Investigating lightweight deep-learning noise suppression under a <strong>sub-10 ms end-to-end latency</strong> constraint, targeting mild-to-moderate sensorineural hearing loss.</li>
           <li data-lang="zh">基于 numpy / PyTorch 搭建音频处理管线，完成正弦波合成、噪声叠加、频谱分析与信噪比计算。</li>
@@ -221,17 +507,24 @@
           <li data-lang="zh">计划部署至树莓派 / ESP32 与麦克风阵列，测量真实端到端延迟与功耗。</li>
           <li data-lang="en">Planned deployment to Raspberry Pi / ESP32 with a microphone array, measuring real end-to-end latency and power consumption.</li>
         </ul>
-        <div class="tags"><span>Python</span><span>NumPy</span><span>PyTorch</span><span>DSP</span><span>Speech Enhancement</span><span>Embedded</span></div>
+      </div>
+      <div class="tags">
+        <span>Python</span><span>NumPy</span><span>PyTorch</span><span>DSP</span><span>Speech Enhancement</span><span>Embedded</span>
       </div>
     </div>
   </section>
 
-  <!-- ============ 技能 ============ -->
-  <section>
-    <h2><span data-lang="zh">技能</span><span data-lang="en">Skills</span></h2>
-    <div class="skillgrid">
-      <div class="skill">
-        <h4><span data-lang="zh">编程与算法</span><span data-lang="en">Programming &amp; Algorithms</span></h4>
+  <!-- ==================== 03 技能 ==================== -->
+  <section id="skills">
+    <div class="sec-head">
+      <span class="sec-num">03</span>
+      <h2 class="sec-title">
+        <span data-lang="zh">技能</span><span data-lang="en">Skills</span>
+      </h2>
+    </div>
+    <div class="skills">
+      <div class="skill reveal">
+        <h4><span data-lang="zh">编程与算法</span><span data-lang="en">Programming</span></h4>
         <ul>
           <li data-lang="zh">C++17（算法与数据结构）</li>
           <li data-lang="en">C++17 (algorithms &amp; data structures)</li>
@@ -241,29 +534,29 @@
           <li data-lang="en">Git and GitHub workflow</li>
         </ul>
       </div>
-      <div class="skill">
-        <h4><span data-lang="zh">数学与信号</span><span data-lang="en">Mathematics &amp; Signals</span></h4>
+      <div class="skill reveal">
+        <h4><span data-lang="zh">数学与信号</span><span data-lang="en">Math &amp; Signals</span></h4>
         <ul>
           <li data-lang="zh">线性代数（自学中）</li>
           <li data-lang="en">Linear algebra (self-study)</li>
           <li data-lang="zh">微积分 / 概率统计（自学中）</li>
-          <li data-lang="en">Calculus / probability &amp; statistics (self-study)</li>
+          <li data-lang="en">Calculus / probability &amp; statistics</li>
           <li data-lang="zh">信号与系统、数字信号处理（自学中）</li>
-          <li data-lang="en">Signals &amp; systems, DSP (self-study)</li>
+          <li data-lang="en">Signals &amp; systems, DSP</li>
         </ul>
       </div>
-      <div class="skill">
-        <h4><span data-lang="zh">专业领域</span><span data-lang="en">Domain Knowledge</span></h4>
+      <div class="skill reveal">
+        <h4><span data-lang="zh">专业领域</span><span data-lang="en">Domain</span></h4>
         <ul>
           <li data-lang="zh">听力学基础与助听器验配原理</li>
-          <li data-lang="en">Fundamentals of audiology and hearing-aid fitting</li>
+          <li data-lang="en">Audiology and hearing-aid fitting</li>
           <li data-lang="zh">语音增强与降噪算法</li>
-          <li data-lang="en">Speech enhancement and noise reduction</li>
+          <li data-lang="en">Speech enhancement &amp; noise reduction</li>
           <li data-lang="zh">嵌入式音频原型（ESP32 / Raspberry Pi）</li>
-          <li data-lang="en">Embedded audio prototyping (ESP32 / Raspberry Pi)</li>
+          <li data-lang="en">Embedded audio prototyping</li>
         </ul>
       </div>
-      <div class="skill">
+      <div class="skill reveal">
         <h4><span data-lang="zh">语言</span><span data-lang="en">Languages</span></h4>
         <ul>
           <li data-lang="zh">中文（母语）</li>
@@ -275,83 +568,117 @@
     </div>
   </section>
 
-  <!-- ============ 获奖经历 ============ -->
-  <section>
-    <h2><span data-lang="zh">获奖与参赛经历</span><span data-lang="en">Awards &amp; Competitions</span></h2>
-
-    <div class="item">
-      <div class="item-head">
-        <h3><span data-lang="zh">全国青少年信息学奥林匹克联赛（NOIP）</span><span data-lang="en">National Olympiad in Informatics in Provinces (NOIP)</span></h3>
-        <span class="when"><span data-lang="zh">2024</span><span data-lang="en">2024</span></span>
-      </div>
-      <div class="desc">
-        <ul>
-          <li data-lang="zh">NOIP 2024 参赛。</li>
-          <li data-lang="en">Participant, NOIP 2024.</li>
-        </ul>
-      </div>
+  <!-- ==================== 04 获奖 ==================== -->
+  <section id="awards">
+    <div class="sec-head">
+      <span class="sec-num">04</span>
+      <h2 class="sec-title">
+        <span data-lang="zh">获奖与参赛经历</span><span data-lang="en">Awards &amp; Competitions</span>
+      </h2>
     </div>
+    <div class="tl">
 
-    <div class="item">
-      <div class="item-head">
-        <h3><span data-lang="zh">CCF 非专业级软件能力认证（CSP）</span><span data-lang="en">Certified Software Professional (CSP)</span></h3>
-        <span class="when"><span data-lang="zh">—</span><span data-lang="en">—</span></span>
+      <div class="tl-item reveal">
+        <div class="tl-head">
+          <h3>
+            <span data-lang="zh">全国青少年信息学奥林匹克联赛（NOIP）</span>
+            <span data-lang="en">National Olympiad in Informatics in Provinces (NOIP)</span>
+          </h3>
+          <span class="tl-badge">2024</span>
+        </div>
+        <div class="body">
+          <ul class="bul">
+            <li data-lang="zh">NOIP 2024 参赛。</li>
+            <li data-lang="en">Participant, NOIP 2024.</li>
+          </ul>
+        </div>
       </div>
-      <div class="desc">
-        <ul>
-          <li data-lang="zh">CSP-S（提高级）第一轮 二等奖　×1</li>
-          <li data-lang="en">CSP-S (Senior) First Round — Second Prize　×1</li>
-          <li data-lang="zh">CSP-J（入门级）第一轮 三等奖　×2</li>
-          <li data-lang="en">CSP-J (Junior) First Round — Third Prize　×2</li>
-        </ul>
-      </div>
-    </div>
 
-    <div class="item">
-      <div class="item-head">
-        <h3><span data-lang="zh">蓝桥杯全国软件和信息技术专业人才大赛</span><span data-lang="en">Lanqiao Cup National Software and IT Professionals Competition</span></h3>
-        <span class="when"><span data-lang="zh">Scratch 组</span><span data-lang="en">Scratch category</span></span>
+      <div class="tl-item reveal">
+        <div class="tl-head">
+          <h3>
+            <span data-lang="zh">CCF 非专业级软件能力认证（CSP）</span>
+            <span data-lang="en">Certified Software Professional (CSP)</span>
+          </h3>
+        </div>
+        <div class="body">
+          <ul class="bul">
+            <li data-lang="zh">CSP-S（提高级）第一轮 <strong>二等奖</strong>　×1</li>
+            <li data-lang="en">CSP-S (Senior) First Round — <strong>Second Prize</strong>　×1</li>
+            <li data-lang="zh">CSP-J（入门级）第一轮 三等奖　×2</li>
+            <li data-lang="en">CSP-J (Junior) First Round — Third Prize　×2</li>
+          </ul>
+        </div>
       </div>
-      <div class="desc">
-        <ul>
-          <li data-lang="zh">市赛 一等奖，晋级国赛。</li>
-          <li data-lang="en">Municipal level — First Prize, advanced to the national round.</li>
-          <li data-lang="zh">省赛 三等奖（单独参赛）。</li>
-          <li data-lang="en">Provincial level — Third Prize (separate entry).</li>
-          <li data-lang="zh">国赛 优秀奖。</li>
-          <li data-lang="en">National level — Excellence Award.</li>
-        </ul>
+
+      <div class="tl-item reveal">
+        <div class="tl-head">
+          <h3>
+            <span data-lang="zh">蓝桥杯全国软件和信息技术专业人才大赛</span>
+            <span data-lang="en">Lanqiao Cup — National Software and IT Professionals Competition</span>
+          </h3>
+          <span class="tl-badge">Scratch</span>
+        </div>
+        <div class="body">
+          <ul class="bul">
+            <li data-lang="zh">市赛 <strong>一等奖</strong>，晋级国赛。</li>
+            <li data-lang="en">Municipal level — <strong>First Prize</strong>, advanced to the national round.</li>
+            <li data-lang="zh">省赛 三等奖（单独参赛）。</li>
+            <li data-lang="en">Provincial level — Third Prize (separate entry).</li>
+            <li data-lang="zh">国赛 优秀奖。</li>
+            <li data-lang="en">National level — Excellence Award.</li>
+          </ul>
+        </div>
       </div>
-      <div class="tags"><span>Scratch</span></div>
+
     </div>
   </section>
 
-  <!-- ============ 研究兴趣 ============ -->
-  <section>
-    <h2><span data-lang="zh">研究兴趣</span><span data-lang="en">Research Interests</span></h2>
-    <div class="desc">
-      <ul>
-        <li data-lang="zh"><strong>助听器场景的低延迟语音增强</strong> —— 在 10 ms 延迟预算内平衡降噪量与语音可懂度。</li>
-        <li data-lang="en"><strong>Low-latency speech enhancement for hearing aids</strong> — balancing noise suppression and intelligibility within a 10 ms budget.</li>
-        <li data-lang="zh"><strong>主动降噪与通透模式的融合</strong> —— 让降噪深度与环境感知连续可调，而非离散切换。</li>
-        <li data-lang="en"><strong>Fusion of active noise cancellation and transparency mode</strong> — continuous rather than discrete control between attenuation and awareness.</li>
-        <li data-lang="zh"><strong>数据驱动的个性化降噪</strong> —— 从电测听图预测用户偏好的降噪策略。</li>
-        <li data-lang="en"><strong>Data-driven personalised noise reduction</strong> — predicting preferred strategies from audiograms.</li>
-      </ul>
+  <!-- ==================== 05 研究兴趣 ==================== -->
+  <section id="research">
+    <div class="sec-head">
+      <span class="sec-num">05</span>
+      <h2 class="sec-title">
+        <span data-lang="zh">研究兴趣</span><span data-lang="en">Research Interests</span>
+      </h2>
+    </div>
+    <div class="card reveal">
+      <div class="body">
+        <ul class="bul">
+          <li data-lang="zh"><strong>助听器场景的低延迟语音增强</strong> —— 在 10 ms 延迟预算内平衡降噪量与语音可懂度。</li>
+          <li data-lang="en"><strong>Low-latency speech enhancement for hearing aids</strong> — balancing noise suppression and intelligibility within a 10 ms budget.</li>
+          <li data-lang="zh"><strong>主动降噪与通透模式的融合</strong> —— 让降噪深度与环境感知连续可调，而非离散切换。</li>
+          <li data-lang="en"><strong>Fusion of active noise cancellation and transparency mode</strong> — continuous rather than discrete control between attenuation and awareness.</li>
+          <li data-lang="zh"><strong>数据驱动的个性化降噪</strong> —— 从电测听图预测用户偏好的降噪策略。</li>
+          <li data-lang="en"><strong>Data-driven personalised noise reduction</strong> — predicting preferred strategies from audiograms.</li>
+        </ul>
+      </div>
     </div>
   </section>
 
-  <footer>
-    <span data-lang="zh">最后更新：2026 年 10 月</span>
-    <span data-lang="en">Last updated: October 2026</span>
-  </footer>
+</main>
 
-</div>
+<!-- ==================== 页脚 ==================== -->
+<footer>
+  <div class="foot-in">
+    <span>
+      <span data-lang="zh">最后更新：2026 年 10 月</span>
+      <span data-lang="en">Last updated: October 2026</span>
+    </span>
+    <span>
+      <a href="https://github.com/eyru/personalweb" target="_blank" rel="noopener">
+        <span data-lang="zh">本站源码</span><span data-lang="en">Source</span>
+      </a>
+      <span> · </span>
+      <a href="#top"><span data-lang="zh">回到顶部</span><span data-lang="en">Back to top</span></a>
+    </span>
+  </div>
+</footer>
 
 <script>
+/* ---------- 语言切换 ---------- */
 function setLang(lang){
   document.documentElement.lang = (lang === 'zh') ? 'zh-CN' : 'en';
-  // 只给当前语言的元素加 .on；其余保持隐藏
   document.querySelectorAll('[data-lang]').forEach(function(el){
     el.classList.toggle('on', el.getAttribute('data-lang') === lang);
   });
@@ -359,10 +686,66 @@ function setLang(lang){
   document.getElementById('btn-en').classList.toggle('on', lang === 'en');
   try { localStorage.setItem('cv-lang', lang); } catch(e){}
 }
+
+/* ---------- 波形装饰 ---------- */
+(function(){
+  var wave = document.querySelector('.wave');
+  if (!wave) return;
+  var n = 56;
+  for (var i = 0; i < n; i++){
+    var b = document.createElement('i');
+    // 中间高、两端低的包络，看起来像音频波形
+    var t = i / (n - 1);
+    var env = Math.sin(Math.PI * t);
+    var h = (0.18 + 0.82 * env) * (0.55 + 0.45 * Math.abs(Math.sin(i * 1.7)));
+    b.style.height = (h * 100) + '%';
+    b.style.animationDelay = (-(i % 14) * 0.19) + 's';
+    b.style.animationDuration = (2.6 + (i % 7) * 0.22) + 's';
+    wave.appendChild(b);
+  }
+})();
+
+/* ---------- 滚动入场（渐进增强：无 JS 时内容正常显示） ---------- */
+(function(){
+  var items = document.querySelectorAll('.reveal');
+  if (!items.length) return;
+  if (!('IntersectionObserver' in window) ||
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    items.forEach(function(el){ el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  items.forEach(function(el, i){
+    el.style.transitionDelay = (Math.min(i, 3) * 60) + 'ms';
+    io.observe(el);
+  });
+})();
+
+/* ---------- 滚动进度 ---------- */
+(function(){
+  var bar = document.getElementById('progress');
+  if (!bar) return;
+  var raf = false;
+  function update(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (h > 0 ? (window.scrollY / h) * 100 : 0) + '%';
+    raf = false;
+  }
+  window.addEventListener('scroll', function(){
+    if (!raf){ raf = true; requestAnimationFrame(update); }
+  }, { passive: true });
+  update();
+})();
+
+/* ---------- 初始化语言 ---------- */
 (function(){
   var saved = null;
   try { saved = localStorage.getItem('cv-lang'); } catch(e){}
-  if (!saved) {
+  if (!saved){
     saved = (navigator.language || 'zh').toLowerCase().indexOf('zh') === 0 ? 'zh' : 'en';
   }
   setLang(saved);
