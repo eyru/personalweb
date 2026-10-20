@@ -521,22 +521,24 @@ html:not(.js) [data-lang="en"]{display:none !important}
           <span data-lang="zh">Hearizon Sync —— 麦克风实时字幕翻译</span>
           <span data-lang="en">Hearizon Sync — Real-time Speech Captioning &amp; Translation</span>
         </h3>
-        <span class="when"><span data-lang="zh">已开源</span><span data-lang="en">Open Source</span></span>
+        <span class="when"><span data-lang="zh">已开源 · v1.1.0</span><span data-lang="en">Open Source · v1.1.0</span></span>
       </div>
       <div class="body">
         <ul class="bul">
-          <li data-lang="zh">面向外教课与英文讲座场景：<strong>说完一句，屏幕即刻给出原文与译文</strong>，双栏字幕呈现。</li>
-          <li data-lang="en">Built for foreign-language lectures and talks — <strong>as you finish a sentence, the original transcript and translation appear</strong> in a two-pane caption view.</li>
+          <li data-lang="zh">面向外教课与英文讲座场景：<strong>边说边出字</strong>，首字延迟约 <strong>0.3 秒</strong>，说完整句后补上译文，双栏字幕呈现。</li>
+          <li data-lang="en">Built for foreign-language lectures — <strong>live captions appear as you speak</strong> with ~0.3 s first-word latency, then the full translation lands when the sentence ends.</li>
           <li data-lang="zh">识别完全本地运行（阿里达摩院 <strong>SenseVoice-Small</strong>，ONNX 推理），语音数据不出本机；中文字符错误率约 8%，速度快于实时 50 倍。</li>
           <li data-lang="en">ASR runs fully on-device (Alibaba DAMO <strong>SenseVoice-Small</strong>, ONNX). Audio never leaves the machine; ~8% CER on Chinese at 50× real-time.</li>
-          <li data-lang="zh">双翻译引擎：本地 <strong>opus-mt</strong>（CTranslate2，断网可用）与云端 DeepSeek，支持自动降级；本地翻译 0.03 秒/句。</li>
-          <li data-lang="en">Dual translation backends: local <strong>opus-mt</strong> (CTranslate2, works offline) and cloud DeepSeek, with automatic fallback; 0.03 s per sentence locally.</li>
+          <li data-lang="zh">输入语言可选（<strong>英／中／日／韩／粤／德／法／意／西</strong>），支持语言对语言自由组合，避免错认耽误正事。</li>
+          <li data-lang="en">Selectable <strong>input language</strong> (EN / ZH / JA / KO / Cantonese / DE / FR / IT / ES) with free source-to-target pairing.</li>
+          <li data-lang="zh">三引擎翻译：云端 DeepSeek、<strong>有道智云</strong>（支持医学等领域）、本地 <strong>opus-mt</strong>（CTranslate2，断网可用），逐级自动降级；本地 0.03 秒/句。</li>
+          <li data-lang="en">Triple translation backends: cloud DeepSeek, <strong>Youdao</strong> (medical domain support) and local <strong>opus-mt</strong> (CTranslate2, works offline), with cascading fallback; 0.03 s/sentence locally.</li>
           <li data-lang="zh">打包为 Windows 安装程序：内置 Python 运行时与全部模型，开箱即用；自主设计图标与应用界面。</li>
           <li data-lang="en">Shipped as a Windows installer bundling the Python runtime and all models — zero setup; custom icon and UI design.</li>
         </ul>
       </div>
       <div class="tags">
-        <span>Python</span><span>SenseVoice</span><span>CTranslate2</span><span>ONNX</span><span>DeepSeek API</span><span>PyInstaller</span><span>NSIS</span>
+        <span>Python</span><span>SenseVoice</span><span>Whisper</span><span>CTranslate2</span><span>ONNX</span><span>DeepSeek API</span><span>Youdao</span><span>PyInstaller</span><span>NSIS</span>
       </div>
       <div class="card-links">
         <a class="chip" href="https://github.com/eyru/hearizon-sync" target="_blank" rel="noopener">
