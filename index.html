@@ -521,7 +521,7 @@ html:not(.js) [data-lang="en"]{display:none !important}
           <span data-lang="zh">Hearizon Sync —— 麦克风实时字幕翻译</span>
           <span data-lang="en">Hearizon Sync — Real-time Speech Captioning &amp; Translation</span>
         </h3>
-        <span class="when"><span data-lang="zh">已开源 · v2.1.1</span><span data-lang="en">Open Source · v2.1.1</span></span>
+        <span class="when"><span data-lang="zh">已开源 · v2.5.1</span><span data-lang="en">Open Source · v2.5.1</span></span>
       </div>
       <div class="body">
         <ul class="bul">
@@ -531,14 +531,16 @@ html:not(.js) [data-lang="en"]{display:none !important}
           <li data-lang="en">ASR runs fully on-device (Alibaba DAMO <strong>SenseVoice-Small</strong>, ONNX). Audio never leaves the machine; ~8% CER on Chinese at 50× real-time.</li>
           <li data-lang="zh">输入语言可选（<strong>英／中／日／韩／粤／德／法／意／西</strong>），支持语言对语言自由组合，避免错认耽误正事。</li>
           <li data-lang="en">Selectable <strong>input language</strong> (EN / ZH / JA / KO / Cantonese / DE / FR / IT / ES) with free source-to-target pairing.</li>
-          <li data-lang="zh">三引擎翻译：云端 DeepSeek、<strong>有道智云</strong>（支持医学等领域）、本地 <strong>opus-mt</strong>（CTranslate2，断网可用），逐级自动降级；本地 0.03 秒/句。</li>
-          <li data-lang="en">Triple translation backends: cloud DeepSeek, <strong>Youdao</strong> (medical domain support) and local <strong>opus-mt</strong> (CTranslate2, works offline), with cascading fallback; 0.03 s/sentence locally.</li>
+          <li data-lang="zh">翻译拆成<strong>三条互相独立的路线</strong>：本地 <strong>opus-mt</strong>（CTranslate2，断网可用）；<strong>在线翻译（免费）</strong>走 MyMemory 公共接口，国内直连、不用填 Key、零成本；<strong>API 模式（付费）</strong>接 DeepSeek 与 <strong>有道智云</strong>（医学领域），需自己明确选择。</li>
+          <li data-lang="en">Translation is split into <strong>three independent modes</strong>: local <strong>opus-mt</strong> (CTranslate2, offline); a <strong>free online mode</strong> over the MyMemory public API (no key, no cost, reachable from mainland China); and a <strong>paid API mode</strong> for DeepSeek and <strong>Youdao</strong> (medical domain), which you must opt into explicitly.</li>
           <li data-lang="zh">打包为 Windows 安装程序：内置 Python 运行时与全部模型，开箱即用；自主设计图标与应用界面。</li>
           <li data-lang="en">Shipped as a Windows installer bundling the Python runtime and all models — zero setup; custom icon and UI design.</li>
           <li data-lang="zh">v2.0.1 完成整套 UI 重绘：圆角控件、自绘下拉选择器（含选语言弹层）、现代滚动条与可滚动侧栏；字幕支持 3 套配色与贴底/贴顶，新增系统托盘与真实时间轴 SRT 导出。</li>
           <li data-lang="en">v2.0.1 ships a full UI redesign — rounded controls, custom dropdowns with a language picker popup, modern scrollbars and a scrollable sidebar; 3 subtitle themes, top/bottom placement, a system tray and real-timeline SRT export.</li>
           <li data-lang="zh">v2.1.1 新增<strong>自动纠错-beta</strong>：识别后做最小修正（本地规则 + 云端 LLM，侧栏可开关）；修复「保存记录 / 导出 SRT」在 Program Files 下的写入失败；托盘图标区分「正在同传 / 已停止」。</li>
           <li data-lang="en">v2.1.1 adds <strong>automatic correction-beta</strong> — minimal post-ASR fixes with a sidebar toggle (local rules + cloud LLM), fixes save/SRT export failing under Program Files, and distinguishes running/stopped tray icons.</li>
+          <li data-lang="zh">v2.5.1 重构翻译模式并删除「自动降级」：切换模式时用不了的语言会<strong>变灰不可选</strong>；选中付费 API 模式时状态栏提示「API模式启动，auto功能失效」并自动打开自动纠错，其它模式勾选纠错会先提醒<strong>会消耗 API 余额</strong>（可不再提醒）；修复无 NVIDIA 显卡却提示「已检测到显卡」的文案问题。</li>
+          <li data-lang="en">v2.5.1 rebuilds translation modes and removes the cascading fallback: unsupported languages are <strong>greyed out and unselectable</strong>; choosing paid API mode shows "API mode on, auto disabled" and force-enables auto-correction, while enabling correction in other modes warns that it <strong>consumes API balance</strong> (with a don't-remind checkbox); fixes the "GPU detected" text shown on machines with no NVIDIA card.</li>
           <li data-lang="zh">采用 <strong>GPL-3.0 + 商业许可双许可</strong>：个人学习/研究可免费使用，闭源商用需取得商业许可。</li>
           <li data-lang="en">Dual-licensed under <strong>GPL-3.0 + a commercial license</strong>: free for personal study and research, commercial closed-source use requires a license.</li>
         </ul>
