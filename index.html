@@ -521,48 +521,24 @@ html:not(.js) [data-lang="en"]{display:none !important}
           <span data-lang="zh">Hearizon Sync —— 麦克风实时字幕翻译</span>
           <span data-lang="en">Hearizon Sync — Real-time Speech Captioning &amp; Translation</span>
         </h3>
-        <span class="when"><span data-lang="zh">已开源 · v2.5.5</span><span data-lang="en">Open Source · v2.5.5</span></span>
+        <span class="when"><span data-lang="zh">已开源 · v2.5.6</span><span data-lang="en">Open Source · v2.5.6</span></span>
       </div>
       <div class="body">
         <ul class="bul">
-          <li data-lang="zh">面向外教课与英文讲座场景：<strong>边说边出字</strong>，首字延迟约 <strong>0.3 秒</strong>，说完整句后补上译文，双栏字幕呈现。</li>
-          <li data-lang="en">Built for foreign-language lectures — <strong>live captions appear as you speak</strong> with ~0.3 s first-word latency, then the full translation lands when the sentence ends.</li>
-          <li data-lang="zh">识别完全本地运行（阿里达摩院 <strong>SenseVoice-Small</strong>，ONNX 推理），语音数据不出本机；中文字符错误率约 8%，速度快于实时 50 倍。</li>
-          <li data-lang="en">ASR runs fully on-device (Alibaba DAMO <strong>SenseVoice-Small</strong>, ONNX). Audio never leaves the machine; ~8% CER on Chinese at 50× real-time.</li>
-          <li data-lang="zh">输入语言可选（<strong>英／中／日／韩／粤／德／法／意／西</strong>），支持语言对语言自由组合，避免错认耽误正事。</li>
-          <li data-lang="en">Selectable <strong>input language</strong> (EN / ZH / JA / KO / Cantonese / DE / FR / IT / ES) with free source-to-target pairing.</li>
-          <li data-lang="zh">翻译拆成<strong>三条互相独立的路线</strong>：本地 <strong>opus-mt</strong>（CTranslate2，断网可用）；<strong>在线翻译（免费）</strong>走 MyMemory 公共接口，国内直连、不用填 Key、零成本；<strong>API 模式（付费）</strong>接 DeepSeek 与 <strong>有道智云</strong>（医学领域），需自己明确选择。</li>
-          <li data-lang="en">Translation is split into <strong>three independent modes</strong>: local <strong>opus-mt</strong> (CTranslate2, offline); a <strong>free online mode</strong> over the MyMemory public API (no key, no cost, reachable from mainland China); and a <strong>paid API mode</strong> for DeepSeek and <strong>Youdao</strong> (medical domain), which you must opt into explicitly.</li>
-          <li data-lang="zh">打包为 Windows 安装程序：内置 Python 运行时与全部模型，开箱即用；自主设计图标与应用界面。</li>
-          <li data-lang="en">Shipped as a Windows installer bundling the Python runtime and all models — zero setup; custom icon and UI design.</li>
-          <li data-lang="zh">v2.0.1 完成整套 UI 重绘：圆角控件、自绘下拉选择器（含选语言弹层）、现代滚动条与可滚动侧栏；字幕支持 3 套配色与贴底/贴顶，新增系统托盘与真实时间轴 SRT 导出。</li>
-          <li data-lang="en">v2.0.1 ships a full UI redesign — rounded controls, custom dropdowns with a language picker popup, modern scrollbars and a scrollable sidebar; 3 subtitle themes, top/bottom placement, a system tray and real-timeline SRT export.</li>
-          <li data-lang="zh">v2.1.1 新增<strong>自动纠错-beta</strong>：识别后做最小修正（本地规则 + 云端 LLM，侧栏可开关）；修复「保存记录 / 导出 SRT」在 Program Files 下的写入失败；托盘图标区分「正在同传 / 已停止」。</li>
-          <li data-lang="en">v2.1.1 adds <strong>automatic correction-beta</strong> — minimal post-ASR fixes with a sidebar toggle (local rules + cloud LLM), fixes save/SRT export failing under Program Files, and distinguishes running/stopped tray icons.</li>
-          <li data-lang="zh">v2.5.5：API 模式新增<b>引擎选择</b>（DeepSeek / 有道智云 / 自动兜底）；启用<b>高 DPI 适配</b>，高分屏字体与控件清晰不再发虚；新增<b>在线检查更新</b>，启动时弹窗介绍新版本，可取消、可跳过，覆盖安装保留全部设置与 API Key。</li>
-          <li data-lang="en">v2.5.5 adds an <b>API engine selector</b> (DeepSeek / Youdao / auto-fallback), <b>high-DPI support</b> so text and controls stay crisp on scaled displays, and an <b>in-app update checker</b> that shows release notes, can be dismissed or skipped, and reinstalls while keeping all settings and API keys.</li>
-          <li data-lang="zh">v2.5.1 重构翻译模式并删除「自动降级」：切换模式时用不了的语言会<strong>变灰不可选</strong>；选中付费 API 模式时状态栏提示「API模式启动，auto功能失效」并自动打开自动纠错，其它模式勾选纠错会先提醒<strong>会消耗 API 余额</strong>（可不再提醒）；修复无 NVIDIA 显卡却提示「已检测到显卡」的文案问题。</li>
-          <li data-lang="en">v2.5.1 rebuilds translation modes and removes the cascading fallback: unsupported languages are <strong>greyed out and unselectable</strong>; choosing paid API mode shows "API mode on, auto disabled" and force-enables auto-correction, while enabling correction in other modes warns that it <strong>consumes API balance</strong> (with a don't-remind checkbox); fixes the "GPU detected" text shown on machines with no NVIDIA card.</li>
-          <li data-lang="zh">采用 <strong>GPL-3.0 + 商业许可双许可</strong>：个人学习/研究可免费使用，闭源商用需取得商业许可。</li>
-          <li data-lang="en">Dual-licensed under <strong>GPL-3.0 + a commercial license</strong>: free for personal study and research, commercial closed-source use requires a license.</li>
+          <li data-lang="zh">面向外教课与英文讲座：<strong>边说边出字</strong>，首字延迟约 0.3 秒，说完整句补上译文，双栏对照呈现。</li>
+          <li data-lang="en">Built for lectures and talks: <strong>live captions as you speak</strong>, ~0.3 s first-word latency, with the translation landing when the sentence ends.</li>
+          <li data-lang="zh">识别完全本地运行（SenseVoice-Small，ONNX），音频不出本机，中文字符错误率约 8%，快于实时 50 倍。</li>
+          <li data-lang="en">ASR runs fully on-device (SenseVoice-Small, ONNX) — audio never leaves the machine, ~8% CER on Chinese at 50× real-time.</li>
+          <li data-lang="zh">翻译分三条独立路线：本地 <strong>opus-mt</strong>（离线）、<strong>免费在线</strong>（MyMemory，无需 Key、国内直连）、<strong>API 模式</strong>（DeepSeek / 有道智云，按需付费）。</li>
+          <li data-lang="en">Three independent translation modes: local <strong>opus-mt</strong> (offline), <strong>free online</strong> (MyMemory, no key needed), and <strong>paid API</strong> (DeepSeek / Youdao).</li>
+          <li data-lang="zh">听力学领域增强：领域词表纠错与降噪，改善远场与嘈杂环境下的识别；支持 8 种目标语言互译。</li>
+          <li data-lang="en">Audiology-aware recognition with domain-term correction and noise gating; 8 target languages supported.</li>
+          <li data-lang="zh">Windows 安装包内置运行时与全部模型，开箱即用；<strong>GPL-3.0 + 商业许可</strong>双许可。</li>
+          <li data-lang="en">Ships as a Windows installer bundling the runtime and all models; dual-licensed <strong>GPL-3.0 + commercial</strong>.</li>
         </ul>
       </div>
       <div class="tags">
-        <span>Python</span><span>SenseVoice</span><span>Whisper</span><span>CTranslate2</span><span>ONNX</span><span>DeepSeek API</span><span>Youdao</span><span>PyInstaller</span><span>NSIS</span><span>GPL-3.0</span>
-      </div>
-      <div class="card-links">
-        <a class="chip" href="https://github.com/eyru/hearizon-sync" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2 0 1.9 1.2 1.9 1.2 1 1.8 2.8 1.3 3.5 1 0-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-6 0-1.2.5-2.3 1.2-3.1-.1-.4-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.2.8.8 1.2 1.9 1.2 3.1 0 4.7-2.8 5.7-5.5 6 .4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3"/></svg>
-          github.com/eyru/hearizon-sync
-        </a>
-        <a class="chip" href="https://github.com/eyru/hearizon-sync/releases/latest" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
-          <span data-lang="zh">下载安装包</span><span data-lang="en">Download</span>
-        </a>
-        <a class="chip" href="https://github.com/eyru/hearizon-sync/blob/main/LICENSE.txt" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8"/></svg>
-          <span data-lang="zh">GPL-3.0 / 商业许可</span><span data-lang="en">GPL-3.0 / Commercial</span>
-        </a>
+        <span>Python</span><span>SenseVoice</span><span>CTranslate2</span><span>ONNX</span><span>DeepSeek API</span><span>PyInstaller</span><span>GPL-3.0</span>
       </div>
     </div>
   </section>
