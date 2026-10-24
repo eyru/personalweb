@@ -521,7 +521,7 @@ html:not(.js) [data-lang="en"]{display:none !important}
           <span data-lang="zh">Hearizon Sync —— 麦克风实时字幕翻译</span>
           <span data-lang="en">Hearizon Sync — Real-time Speech Captioning &amp; Translation</span>
         </h3>
-        <span class="when"><span data-lang="zh">已开源 · v2.5.1</span><span data-lang="en">Open Source · v2.5.1</span></span>
+        <span class="when"><span data-lang="zh">已开源 · v2.5.5</span><span data-lang="en">Open Source · v2.5.5</span></span>
       </div>
       <div class="body">
         <ul class="bul">
@@ -539,6 +539,8 @@ html:not(.js) [data-lang="en"]{display:none !important}
           <li data-lang="en">v2.0.1 ships a full UI redesign — rounded controls, custom dropdowns with a language picker popup, modern scrollbars and a scrollable sidebar; 3 subtitle themes, top/bottom placement, a system tray and real-timeline SRT export.</li>
           <li data-lang="zh">v2.1.1 新增<strong>自动纠错-beta</strong>：识别后做最小修正（本地规则 + 云端 LLM，侧栏可开关）；修复「保存记录 / 导出 SRT」在 Program Files 下的写入失败；托盘图标区分「正在同传 / 已停止」。</li>
           <li data-lang="en">v2.1.1 adds <strong>automatic correction-beta</strong> — minimal post-ASR fixes with a sidebar toggle (local rules + cloud LLM), fixes save/SRT export failing under Program Files, and distinguishes running/stopped tray icons.</li>
+          <li data-lang="zh">v2.5.5：API 模式新增<b>引擎选择</b>（DeepSeek / 有道智云 / 自动兜底）；启用<b>高 DPI 适配</b>，高分屏字体与控件清晰不再发虚；新增<b>在线检查更新</b>，启动时弹窗介绍新版本，可取消、可跳过，覆盖安装保留全部设置与 API Key。</li>
+          <li data-lang="en">v2.5.5 adds an <b>API engine selector</b> (DeepSeek / Youdao / auto-fallback), <b>high-DPI support</b> so text and controls stay crisp on scaled displays, and an <b>in-app update checker</b> that shows release notes, can be dismissed or skipped, and reinstalls while keeping all settings and API keys.</li>
           <li data-lang="zh">v2.5.1 重构翻译模式并删除「自动降级」：切换模式时用不了的语言会<strong>变灰不可选</strong>；选中付费 API 模式时状态栏提示「API模式启动，auto功能失效」并自动打开自动纠错，其它模式勾选纠错会先提醒<strong>会消耗 API 余额</strong>（可不再提醒）；修复无 NVIDIA 显卡却提示「已检测到显卡」的文案问题。</li>
           <li data-lang="en">v2.5.1 rebuilds translation modes and removes the cascading fallback: unsupported languages are <strong>greyed out and unselectable</strong>; choosing paid API mode shows "API mode on, auto disabled" and force-enables auto-correction, while enabling correction in other modes warns that it <strong>consumes API balance</strong> (with a don't-remind checkbox); fixes the "GPU detected" text shown on machines with no NVIDIA card.</li>
           <li data-lang="zh">采用 <strong>GPL-3.0 + 商业许可双许可</strong>：个人学习/研究可免费使用，闭源商用需取得商业许可。</li>
