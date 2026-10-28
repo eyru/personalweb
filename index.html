@@ -428,14 +428,14 @@ html:not(.js) [data-lang="en"]{display:none !important}
     <p class="hero-bio" data-lang="zh">
       听力与言语康复学专业本科生，研究兴趣在<strong>助听器与耳机的 AI 辅助降噪</strong>。
       具备信息学竞赛（OI）背景，熟悉 C++ 与算法设计；正在系统自学线性代数、信号与系统，
-      并推进一个从算法到可穿戴原型的实时语音增强项目。
+      并独立实现了两套语音前端引擎（降噪增益与流式切句）。
     </p>
     <p class="hero-bio" data-lang="en">
       Undergraduate in Hearing and Speech Rehabilitation, with research interests in
       <strong>AI-assisted noise reduction for hearing aids and earphones</strong>.
       Background in competitive programming (C++ and algorithm design); currently
-      self-studying linear algebra and signals &amp; systems, while building a real-time
-      speech enhancement project from algorithm to wearable prototype.
+      self-studying linear algebra and signals &amp; systems, and has independently
+      built two speech front-end engines (noise-suppression gain and streaming segmentation).
     </p>
     <div class="cta">
       <a class="chip" href="mailto:hrcsnowfly@outlook.com">
@@ -495,50 +495,69 @@ html:not(.js) [data-lang="en"]{display:none !important}
     <div class="card reveal">
       <div class="row">
         <h3>
-          <span data-lang="zh">实时降噪系统 —— 从算法到可穿戴原型</span>
-          <span data-lang="en">Real-time Noise Reduction System — Algorithm to Wearable Prototype</span>
-        </h3>
-        <span class="when"><span data-lang="zh">进行中</span><span data-lang="en">Ongoing</span></span>
-      </div>
-      <div class="body">
-        <ul class="bul">
-          <li data-lang="zh">面向轻中度感音神经性听损人群，研究 <strong>10 ms 以内端到端延迟</strong>约束下的轻量化深度学习降噪模型。</li>
-          <li data-lang="en">Investigating lightweight deep-learning noise suppression under a <strong>sub-10 ms end-to-end latency</strong> constraint, targeting mild-to-moderate sensorineural hearing loss.</li>
-          <li data-lang="zh">基于 numpy / PyTorch 搭建音频处理管线，完成正弦波合成、噪声叠加、频谱分析与信噪比计算。</li>
-          <li data-lang="en">Built an audio pipeline with numpy / PyTorch: waveform synthesis, noise superposition, spectral analysis and SNR computation.</li>
-          <li data-lang="zh">计划部署至树莓派 / ESP32 与麦克风阵列，测量真实端到端延迟与功耗。</li>
-          <li data-lang="en">Planned deployment to Raspberry Pi / ESP32 with a microphone array, measuring real end-to-end latency and power consumption.</li>
-        </ul>
-      </div>
-      <div class="tags">
-        <span>Python</span><span>NumPy</span><span>PyTorch</span><span>DSP</span><span>Speech Enhancement</span><span>Embedded</span>
-      </div>
-    </div>
-
-    <div class="card reveal">
-      <div class="row">
-        <h3>
           <span data-lang="zh">Hearizon Sync —— 麦克风实时字幕翻译</span>
           <span data-lang="en">Hearizon Sync — Real-time Speech Captioning &amp; Translation</span>
         </h3>
-        <span class="when"><span data-lang="zh">已开源 · v2.5.6</span><span data-lang="en">Open Source · v2.5.6</span></span>
+        <span class="when"><span data-lang="zh">已发布 · v3.0.0</span><span data-lang="en">Released · v3.0.0</span></span>
       </div>
       <div class="body">
         <ul class="bul">
           <li data-lang="zh">面向外教课与英文讲座：<strong>边说边出字</strong>，首字延迟约 0.3 秒，说完整句补上译文，双栏对照呈现。</li>
           <li data-lang="en">Built for lectures and talks: <strong>live captions as you speak</strong>, ~0.3 s first-word latency, with the translation landing when the sentence ends.</li>
-          <li data-lang="zh">识别完全本地运行（SenseVoice-Small，ONNX），音频不出本机，中文字符错误率约 8%，快于实时 50 倍。</li>
-          <li data-lang="en">ASR runs fully on-device (SenseVoice-Small, ONNX) — audio never leaves the machine, ~8% CER on Chinese at 50× real-time.</li>
-          <li data-lang="zh">翻译分三条独立路线：本地 <strong>opus-mt</strong>（离线）、<strong>免费在线</strong>（MyMemory，无需 Key、国内直连）、<strong>API 模式</strong>（DeepSeek / 有道智云，按需付费）。</li>
-          <li data-lang="en">Three independent translation modes: local <strong>opus-mt</strong> (offline), <strong>free online</strong> (MyMemory, no key needed), and <strong>paid API</strong> (DeepSeek / Youdao).</li>
-          <li data-lang="zh">听力学领域增强：领域词表纠错与降噪，改善远场与嘈杂环境下的识别；支持 8 种目标语言互译。</li>
-          <li data-lang="en">Audiology-aware recognition with domain-term correction and noise gating; 8 target languages supported.</li>
+          <li data-lang="zh">翻译三条独立路线随时切换：本地 <strong>opus-mt</strong>（离线）、<strong>免费在线</strong>（MyMemory，免 Key）、<strong>API</strong>（DeepSeek / 有道智云）。</li>
+          <li data-lang="en">Three switchable translation routes: local <strong>opus-mt</strong> (offline), <strong>free online</strong> (MyMemory, no key), and <strong>paid API</strong> (DeepSeek / Youdao).</li>
+          <li data-lang="zh">v3.0 重写音频前端：增益只对语音段生效、静音段交由噪声门压制，底噪不再随音量一起被放大。</li>
+          <li data-lang="en">v3.0 rewrote the audio front end: gain acts on speech only, silence goes to a noise gate, so the noise floor no longer rides up with volume.</li>
           <li data-lang="zh">Windows 安装包内置运行时与全部模型，开箱即用；<strong>GPL-3.0 + 商业许可</strong>双许可。</li>
           <li data-lang="en">Ships as a Windows installer bundling the runtime and all models; dual-licensed <strong>GPL-3.0 + commercial</strong>.</li>
         </ul>
       </div>
       <div class="tags">
         <span>Python</span><span>SenseVoice</span><span>CTranslate2</span><span>ONNX</span><span>DeepSeek API</span><span>PyInstaller</span><span>GPL-3.0</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="row">
+        <h3>
+          <span data-lang="zh">HAE-NSG Core —— 噪声抑制与增益</span>
+          <span data-lang="en">HAE-NSG Core — Noise Suppression &amp; Gain</span>
+        </h3>
+        <span class="when"><span data-lang="zh">私有专享</span><span data-lang="en">Proprietary</span></span>
+      </div>
+      <div class="body">
+        <ul class="bul">
+          <li data-lang="zh">不走「先降噪、再放大」：增益与噪声抑制放进<strong>同一个判决</strong>结算，放大倍数只对语音生效，底噪的绝对电平不会因为放大而上升。</li>
+          <li data-lang="en">Not "denoise, then amplify": gain and suppression are settled in <strong>one decision</strong>, so the multiplier acts on speech only and the noise floor never rises with it.</li>
+          <li data-lang="zh">纯 numpy，无模型、无训练、无外部依赖；3 秒音频 0.5–1.5 ms，比 ASR 推理快两到三个数量级。</li>
+          <li data-lang="en">Pure numpy — no model, no training, no dependencies. 0.5–1.5 ms for 3 s of audio, two to three orders of magnitude faster than ASR inference.</li>
+        </ul>
+      </div>
+      <div class="tags">
+        <span>Python</span><span>NumPy</span><span>DSP</span><span>C++</span>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <div class="row">
+        <h3>
+          <span data-lang="zh">HAE-VAD Core —— 流式语音活动检测与切句</span>
+          <span data-lang="en">HAE-VAD Core — Streaming Voice Activity Detection</span>
+        </h3>
+        <span class="when"><span data-lang="zh">私有专享</span><span data-lang="en">Proprietary</span></span>
+      </div>
+      <div class="body">
+        <ul class="bul">
+          <li data-lang="zh">为「切出来的片段还能不能被正确识别」设计，而不是「有没有人说话」：判据因果、门限自适应、边界回补。</li>
+          <li data-lang="en">Designed for "can this segment still be recognised", not "is anyone talking": causal decisions, adaptive thresholds, edge back-fill.</li>
+          <li data-lang="zh">断句点向能量谷底吸附，词首辅音不再被切掉（<em>Spanish</em> 不会被听成 <em>fan</em>）；门限跟随环境噪声，换房间不用重调。</li>
+          <li data-lang="en">Cut points snap to energy minima so word-initial consonants survive (<em>Spanish</em> never becomes <em>fan</em>); the threshold tracks ambient noise, so a new room needs no retuning.</li>
+          <li data-lang="zh">32 KB Python 包（仅依赖 numpy）与 17 KB C++ 单头文件（零依赖）双实现，输出逐位一致。</li>
+          <li data-lang="en">A 32 KB Python package (numpy only) and a 17 KB dependency-free C++ header, bit-identical in output.</li>
+        </ul>
+      </div>
+      <div class="tags">
+        <span>Python</span><span>C++17</span><span>NumPy</span><span>Real-time</span>
       </div>
     </div>
   </section>
